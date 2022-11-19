@@ -63,16 +63,7 @@ class SignalingClient(
                 if (snapshot != null && snapshot.isEmpty.not()) {
                     snapshot.forEach { dataSnapshot ->
                         val data = dataSnapshot.data
-                        when {
-                            SDPType == "Offer" && data.containsKey("type") && data.get("type") == "offerCandidate" -> {
-                                Log.e("Rsupport", "OfferIceCandidateReceived")
-                                handleIceCandidateReceived(data)
-                            }
-                            SDPType == "Answer" && data.containsKey("type") && data.get("type") == "answerCandidate" -> {
-                                Log.e("Rsupport", "AnswerIceCandidateReceived")
-                                handleIceCandidateReceived(data)
-                            }
-                        }
+                        handleIceCandidateReceived(data)
                     }
                 }
             }
