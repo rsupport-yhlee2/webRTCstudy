@@ -25,8 +25,6 @@ class WebRTCConnectActivity : AppCompatActivity() {
         initializeSignalingClient()
     }
 
-    //private val emptySdpObserver = object : AppSDPObserver(){}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWebRtcconnectBinding.inflate(layoutInflater)
@@ -81,10 +79,6 @@ class WebRTCConnectActivity : AppCompatActivity() {
     }
 
     private fun createSignalListener(): SignalListener = object : SignalListener {
-        override fun onConnectionEstablished() {
-
-        }
-
         override fun onOfferReceived(description: SessionDescription) {
             if (isJoin) {
                 rtcClient.onRemoteSessionReceived(description)
@@ -100,59 +94,55 @@ class WebRTCConnectActivity : AppCompatActivity() {
             rtcClient.addCandidate(iceCandidate)
         }
 
-        override fun onCallEnded() {
-
-        }
-
     }
 
     private fun createPeerConnectionObserver(): PeerConnection.Observer =
         object : PeerConnection.Observer {
             override fun onSignalingChange(p0: PeerConnection.SignalingState?) {
-                Log.e("Rsupport","onSignalingChange")
+                Log.e("Rsupport", "onSignalingChange")
             }
 
             override fun onIceConnectionChange(p0: PeerConnection.IceConnectionState?) {
-                Log.e("Rsupport","onIceConnectionChange")
+                Log.e("Rsupport", "onIceConnectionChange")
             }
 
             override fun onIceConnectionReceivingChange(p0: Boolean) {
-                Log.e("Rsupport","onIceConnectionReceivingChange")
+                Log.e("Rsupport", "onIceConnectionReceivingChange")
             }
 
             override fun onIceGatheringChange(p0: PeerConnection.IceGatheringState?) {
-                Log.e("Rsupport","onIceGatheringChange")
+                Log.e("Rsupport", "onIceGatheringChange")
             }
 
             override fun onIceCandidate(p0: IceCandidate?) {
-                Log.e("Rsupport","onIceCandidate : $p0")
-                signalingClient.sendIceCandidate(p0,isJoin)
+                Log.e("Rsupport", "onIceCandidate : $p0")
+                signalingClient.sendIceCandidate(p0, isJoin)
                 rtcClient.addCandidate(p0)
             }
 
             override fun onIceCandidatesRemoved(p0: Array<out IceCandidate>?) {
-                Log.e("Rsupport","onIceCandidatesRemoved")
+                Log.e("Rsupport", "onIceCandidatesRemoved")
             }
 
             override fun onAddStream(p0: MediaStream?) {
-                Log.e("Rsupport","onAddStream")
+                Log.e("Rsupport", "onAddStream")
                 p0?.videoTracks?.get(0)?.addSink(binding.remoteView)
             }
 
             override fun onRemoveStream(p0: MediaStream?) {
-                Log.e("Rsupport","onRemoveStream")
+                Log.e("Rsupport", "onRemoveStream")
             }
 
             override fun onDataChannel(p0: DataChannel?) {
-                Log.e("Rsupport","onDataChannel")
+                Log.e("Rsupport", "onDataChannel")
             }
 
             override fun onRenegotiationNeeded() {
-                Log.e("Rsupport","onRenegotiationNeeded")
+                Log.e("Rsupport", "onRenegotiationNeeded")
             }
 
             override fun onAddTrack(p0: RtpReceiver?, p1: Array<out MediaStream>?) {
-                Log.e("Rsupport","onAddTrack")
+                Log.e("Rsupport", "onAddTrack")
             }
 
         }
