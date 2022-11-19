@@ -13,8 +13,7 @@ class SignalingClient(
 ) : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + Job()
-    private lateinit var fetchJob: Job
-    private var SDPType: String? = null
+    private var fetchJob: Job
 
     private val database = Firebase.firestore
 
@@ -91,7 +90,6 @@ class SignalingClient(
                 data["sdp"].toString()
             )
         )
-        SDPType = "Answer"
     }
 
     private fun handleOfferReceived(data: Map<String, Any>) {
@@ -102,7 +100,6 @@ class SignalingClient(
                 data["sdp"].toString()
             )
         )
-        SDPType = "Offer"
     }
 
     fun sendIceCandidate(candidate: IceCandidate?, isJoin: Boolean) = runBlocking {

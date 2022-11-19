@@ -35,6 +35,12 @@ class WebRTCConnectActivity : AppCompatActivity() {
         checkCameraAndAudioPermission()
     }
 
+    override fun onDestroy() {
+        signalingClient.destroy()
+        rtcClient.destroy()
+        super.onDestroy()
+    }
+
     private fun getIntentData() {
         roomID = intent?.getStringExtra("roomID")!!
         isJoin = intent?.getBooleanExtra("isJoin", false)!!

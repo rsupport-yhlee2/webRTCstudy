@@ -178,4 +178,9 @@ class WebRTCClient(
 
     fun answer(roomID: String) =
         peerConnection?.Answer(roomID)
+
+    fun destroy(){
+        peerConnection?.dispose()
+        peerConnection?.close()
+    }
 }
