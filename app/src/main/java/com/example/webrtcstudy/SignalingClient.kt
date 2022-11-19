@@ -45,9 +45,6 @@ class SignalingClient(
                     data.containsKey("type") && data.getValue("type").toString() == "ANSWER" -> {
                         handleAnswerReceived(data)
                     }
-                    data.containsKey("type") && data.getValue("type").toString() == "END_CALL" -> {
-                        handleEndCallReceived(data)
-                    }
                 }
             }
         }
@@ -76,10 +73,6 @@ class SignalingClient(
                 data["sdpCandidate"].toString()
             )
         )
-    }
-
-    private fun handleEndCallReceived(data: Map<String, Any>) {
-        Log.e("Rsupport", "handleEndCallReceived")
     }
 
     private fun handleAnswerReceived(data: Map<String, Any>) {
