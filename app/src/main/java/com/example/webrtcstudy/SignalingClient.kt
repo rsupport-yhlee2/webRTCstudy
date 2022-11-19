@@ -24,8 +24,8 @@ class SignalingClient(
     private fun connect() = launch {
 
         //인터넷 연결되어서 통화룸을 만들었을때
-        database.enableNetwork().addOnSuccessListener {
-            signalListener.onConnectionEstablished()
+        database.enableNetwork().addOnFailureListener { e ->
+            Log.e("Rsupport", "connect error : ${e.message}")
         }
 
         //addSnapshotListener 는 변경된 스냅샷 하나만 읽는다.
